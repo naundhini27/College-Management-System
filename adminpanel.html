@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>admin2 | University management system</title>
+
+    <link rel="shortcut icon" href="https://bds-au.vlabs.ac.in/exp/open-reading-frames/simulation/images/Amritalogo.png" type="image/x-icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="all.css">
+
+    <link rel="stylesheet" type="text/css" href="style.min.css">
+
+    <!-- <script src="https://js.stripe.com/v3/"></script> -->
+    
+</head>
+
+<body>
+    
+        
+
+<style>
+	.top-side {
+		background-size: cover;
+		background-position: top center;
+	}
+</style>
+
+<div id="side-nav">
+	<div class="main-menu">
+		<div class="top-side text-center py-4" style="background-image: url(/static/img/dotted.jpg);">
+			<div class="desktop-hide">
+				<div class="toggle-btn" onclick="toggleSidebar()">
+					<i class="fas fa-times"></i>
+				</div>
+			</div>
+			<a href="/">
+				<img src="https://bds-au.vlabs.ac.in/exp/open-reading-frames/simulation/images/Amritalogo.png" width="110px" alt="Logo Django LMS">
+			</a>
+			<p class="text-orange">
+				<mark>
+					<i class="far fa-hand-point-right"></i>
+					Admin
+				</mark>
+			</p>
+		</div>
+		  
+		
+		 
+		  
+		 
+		  
+		  
+		
+		<ul>
+			
+			<li class="">
+				<a href="/dashboard/"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+			</li>
+			
+			<li class="">
+				<a href="/"><i class="fas fa-home"></i>Home</a>
+			</li>
+			<li class="">
+				<a href="/accounts/profile/"><i class="fas fa-user"></i>Profile</a>
+			</li>
+
+			
+			<li class="active">
+				<a href="adminpanel.html"><i class="fas fa-user-tie"></i>Admin Panel</a>
+			</li>
+			<li class="">
+				<a href="lecturers.html"><i class="fas fa-chalkboard-teacher"></i>Lecturers</a>
+			</li>
+			<li class="">
+				<a href="/accounts/students/"><i class="fas fa-user-graduate"></i>Students</a>
+			</li>
+			
+			
+			
+			
+			<li class="">
+				<a href="/programs/"><i class="fas fa-book-open"></i>Programs & Courses</a>
+			</li>
+
+			
+			<li class="">
+				<a href="/quiz/marking_list/"><i class="fas fa-check-double"></i>Complete Exams</a>
+			</li>
+			
+
+			
+			<li class="">
+				<a href="/quiz/progress/"><i class="fas fa-record-vinyl"></i>Quiz Progress Rec</a>
+			</li>
+			<li class="">
+				<a href="/programs/course/allocated/"><i class="fas fa-tasks"></i>Course Allocation</a>
+			</li>
+			<li class="">
+				<a href="/session/"><i class="fas fa-calendar-week"></i>Manage Session</a>
+			</li>
+			<li class="">
+				<a href="/semester/"><i class="fas fa-calendar-alt"></i>Manage Semester</a>
+			</li>
+			
+
+			
+
+			
+			<br />
+			<p class="ml-3">&RightArrow; Others</p>
+			<li class="">
+				<a href="/accounts/setting/"><i class="fas fa-cogs"></i>Account Setting</a>
+			</li>
+			<li class="">
+				<a href="/accounts/change_password/"><i class="fas fa-key"></i>Change Password</a>
+			</li>
+		</ul>
+	</div>
+
+	<footer class="card-footer mt-5 pt-3 pb-5 px-2">
+		<div class="col-12">
+			<p class="small m-0">
+				Read our <a href="#"> Privacy </a> and <a href="#"> Terms of use. </a>
+				<br />Amrita University Management System &copy; <script>document.write(new Date().getFullYear());</script>
+				<br />
+			</p>
+		</div>
+	</footer>
+</div>
+    
+
+    
+    <div id="main">
+        
+            <div id="top-navbar" class="py-1">
+	<div class="container">
+		<div class="nav-wrapper">
+
+			<div class="toggle-btn" onclick="toggleSidebar()">
+				<i class="fas fa-bars"></i>
+			</div>
+
+			<form class="form-header" action="/search/" method="GET">
+				<input id="primary-search" class="au-input au-input--xl" type="text" name="q" value=""
+					placeholder="Search All... #course, #program, #Quiz, #News, #Events" required />
+				<button class="au-btn--submit" type="submit">
+					<i class="fas fa-search"></i>
+				</button>
+			</form>
+
+			<div class="dropdown">
+				<div class="avatar border border-2 border-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<img src="default.png">
+				</div>
+				<div class="dropdown-menu" style="min-width: 14rem !important;">
+					<p class="container text-muted-xs text-center">
+						Last login: Jan. 9, 2024</p>
+
+					
+
+					
+					<a class="dropdown-item" href="/accounts/admin_panel/"><i class="fas fa-user-tie"></i>Admin
+						Panel</a>
+					
+
+					<a class="dropdown-item" href="/accounts/profile/"><i class="fas fa-user"></i>Profile</a>
+					<a class="dropdown-item" href="/accounts/setting/"><i class="fas fa-cogs"></i>Setting</a>
+					<hr>
+					<div style="display: flex; justify-content: center; align-items: center;">
+						<a class="btn btn-secondary" href="/accounts/logout/">
+							<i class="fas fa-sign-out-alt"></i> Signout
+						</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+        
+
+        <div class="container-fluid" id="main-content">
+            
+<div id="input-nav"><a href="/" class="primary1">Home</a> Admin Panel</div>
+<!-- <br> -->
+<div class="title-1"><i class="fas fa-user-tie"></i>Admin Panel</div>
+<br>
+<br>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="border-bottom">
+                Manage<a class="link" href="Lecturers.html"> Lecturers &raquo;</a>
+                <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) lecturers</p>
+            </div>
+
+            <div class="border-bottom mt-3">
+            Manage<a class="link" href="/accounts/students/"> Students &raquo;</a>
+            <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) students</p>
+            </div>
+
+            <div class="border-bottom mt-3">
+            Manage<a class="link" href="/session/"> Session &raquo;</a>
+            <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) sessions</p>
+            </div>
+
+            <div class="mt-3">
+            Manage<a class="link" href="/semester/"> Semester &raquo;</a>
+            <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) semesters</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="border-bottom">
+                Course Add &amp; Drop
+                <label class="switch switch-text switch-success switch-pill" style="float: right;">
+                <input type="checkbox" class="switch-input" checked="true">
+                <span data-on="On" data-off="Off" class="switch-label"></span>
+                <span class="switch-handle"></span>
+                </label>
+                <p class="text-muted">Switch 
+                    <i class="info-text py-0 px-2 bg-success">ON</i> or <i class="info-text py-0 px-2 bg-danger">OFF</i>
+                </p>
+            </div>
+
+            <div class="border-bottom mt-3">
+                Manage<a class="link" href="/programs/"> Programs &amp; Courses &raquo;</a>
+            <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) programs</p>
+            </div>
+
+            <div class="border-bottom mt-3">
+            Manage<a class="link" href="/programs/course/allocated/"> Course Allocations &raquo;</a>
+            <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) course allocations</p>
+            </div>
+
+            <div class="mt-3">
+            Manage<a class="link" href="/"> News &amp; Events &raquo;</a>
+            <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) News &amp; Events</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+
+    </div>
+    
+
+    <script type="text/javascript" src="jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#primary-search').focus(function () {
+                $('#top-navbar').attr('class', 'dim');
+                $('#side-nav').css('pointer-events', 'none');
+                $('#main-content').css('pointer-events', 'none');
+            });
+            $('#primary-search').focusout(function () {
+                $('#top-navbar').removeAttr('class');
+                $('#side-nav').css('pointer-events', 'auto');
+                $('#main-content').css('pointer-events', 'auto');
+            });
+        })
+    </script>
+
+    
+    
+</body>
+
+</html>
