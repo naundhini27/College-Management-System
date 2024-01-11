@@ -1,1 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Lecturers | University management system</title>
+
+    <link rel="shortcut icon" href="https://bds-au.vlabs.ac.in/exp/open-reading-frames/simulation/images/Amritalogo.png" type="image/x-icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="all.css">
+
+    <link rel="stylesheet" type="text/css" href="style.min.css">
+
+    <!-- <script src="https://js.stripe.com/v3/"></script> -->
+    
+</head>
+
+<body>
+<style>
+	.top-side {
+		background-size: cover;
+		background-position: top center;
+	}
+</style>
+
+<div id="side-nav">
+	<div class="main-menu">
+		<div class="top-side text-center py-4" style="background-image: url(/static/img/dotted.jpg);">
+			<div class="desktop-hide">
+				<div class="toggle-btn" onclick="toggleSidebar()">
+					<i class="fas fa-times"></i>
+				</div>
+			</div>
+			<a href="/">
+				<img src="https://bds-au.vlabs.ac.in/exp/open-reading-frames/simulation/images/Amritalogo.png" width="180px" alt="Logo Django LMS">
+			</a>
+			<p class="text-orange">
+				<mark>
+					<i class="far fa-hand-point-right"></i>
+					Admin
+				</mark>
+			</p>
+		</div>
+		  
+		
+		 
+		  
+		 
+		  
+		  
+		
+		<ul>
+			
+			<li class="">
+				<a href="/dashboard/"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+			</li>
+			
+			<li class="">
+				<a href="/"><i class="fas fa-home"></i>Home</a>
+			</li>
+			<li class="">
+				<a href="/accounts/profile/"><i class="fas fa-user"></i>Profile</a>
+			</li>
+
+			
+			<li class="">
+				<a href="adminpanel.html"><i class="fas fa-user-tie"></i>Admin Panel</a>
+			</li>
+			<li class="active">
+				<a href="lecturers.html"><i class="fas fa-chalkboard-teacher"></i>Lecturers</a>
+			</li>
+			<li class="">
+				<a href="/accounts/students/"><i class="fas fa-user-graduate"></i>Students</a>
+			</li>
+			
+
+			
+
+			<li class="">
+				<a href="/programs/"><i class="fas fa-book-open"></i>Programs & Courses</a>
+			</li>
+
+			
+			<li class="">
+				<a href="/quiz/marking_list/"><i class="fas fa-check-double"></i>Complete Exams</a>
+			</li>
+			
+
+			
+			<li class="">
+				<a href="/quiz/progress/"><i class="fas fa-record-vinyl"></i>Quiz Progress Rec</a>
+			</li>
+			<li class="">
+				<a href="/programs/course/allocated/"><i class="fas fa-tasks"></i>Course Allocation</a>
+			</li>
+			<li class="">
+				<a href="/session/"><i class="fas fa-calendar-week"></i>Manage Session</a>
+			</li>
+			<li class="">
+				<a href="/semester/"><i class="fas fa-calendar-alt"></i>Manage Semester</a>
+			</li>
+			
+
+			
+
+			
+			<br />
+			<p class="ml-3">&RightArrow; Others</p>
+			<li class="">
+				<a href="/accounts/setting/"><i class="fas fa-cogs"></i>Account Setting</a>
+			</li>
+			<li class="">
+				<a href="/accounts/change_password/"><i class="fas fa-key"></i>Change Password</a>
+			</li>
+		</ul>
+	</div>
+
+	<footer class="card-footer mt-5 pt-3 pb-5 px-2">
+		<div class="col-12">
+			<p class="small m-0">
+				Read our <a href="#"> Privacy </a> and <a href="#"> Terms of use. </a>
+				<br />Amrita University Management System &copy; <script>document.write(new Date().getFullYear());</script>
+				<br />
+			</p>
+		</div>
+	</footer>
+</div>
+    
+
+    
+    <div id="main">
+        
+            <div id="top-navbar" class="py-1">
+	<div class="container">
+		<div class="nav-wrapper">
+
+			<div class="toggle-btn" onclick="toggleSidebar()">
+				<i class="fas fa-bars"></i>
+			</div>
+
+			<form class="form-header" action="/search/" method="GET">
+				<input id="primary-search" class="au-input au-input--xl" type="text" name="q" value=""
+					placeholder="Search All... #course, #program, #Quiz, #News, #Events" required />
+				<button class="au-btn--submit" type="submit">
+					<i class="fas fa-search"></i>
+				</button>
+			</form>
+
+			<div class="dropdown">
+				<div class="avatar border border-2 border-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<img src="default.png">
+				</div>
+				<div class="dropdown-menu" style="min-width: 14rem !important;">
+					<p class="container text-muted-xs text-center">
+						Last login: Jan. 9, 2024</p>
+
+					
+
+					
+					<a class="dropdown-item" href="adminpanel.html"><i class="fas fa-user-tie"></i>Admin
+						Panel</a>
+					
+
+					<a class="dropdown-item" href="profile.html"><i class="fas fa-user"></i>Profile</a>
+					<a class="dropdown-item" href="setting"><i class="fas fa-cogs"></i>Setting</a>
+					<hr>
+					<div style="display: flex; justify-content: center; align-items: center;">
+						<a class="btn btn-secondary" href="/accounts/logout/">
+							<i class="fas fa-sign-out-alt"></i> Signout
+						</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+        
+
+        <div class="container-fluid" id="main-content">
+            
+
+<div id="input-nav"><a href="/" class="primary1">Home</a> Lecturers</div>
+
+
+<div class="manage-wrap">
+    <a class="btn btn-primary" href="addlecturer.html"><i class="fas fa-plus"></i>Add Lecturer</a>
+</div>
+
+
+<p class="title-1"><i class="fas fa-chalkboard-teacher"></i>Lecturers</p>
+
+
+
+<div class="content-center">
+    <form class="search-form" action="" method="get">
+        <tr>
+    <th></th>
+    <td>
+      
+      <input type="text" name="username" class="au-input" placeholder="ID No." id="id_username">
+      
+      
+    </td>
+  </tr>
+
+  <tr>
+    <th></th>
+    <td>
+      
+      <input type="text" name="email" class="au-input" placeholder="Email" id="id_email">
+      
+      
+    </td>
+  </tr>
+
+  <tr>
+    <th></th>
+    <td>
+      
+      <input type="text" name="name" class="au-input" placeholder="Name" id="id_name">
+      
+      
+        
+      
+    </td>
+  </tr>
+        <button class="btn btn-light" type="submit">
+            <i class="fas fa-search"></i> Filter
+        </button>
+    </form>
+</div>
+
+<div class="table-responsive table-shadow table-light table-striped m-0 mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th> ID No. </th>
+                <th> Full Name </th>
+                <th> Email </th>
+                <th> Mob No. </th>
+                <th> Address/city </th>
+                <th> Last login </th>
+                
+                <th> Action </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr>
+                  <td colspan="8">
+                  <span class="text-danger">
+                    No Lecturer(s).
+                    
+                    <a href="addlecturer.html">
+                    <i class="primary" style="font-size: 22px;">
+                       Add Lecturer Now.
+                    </i>
+                    
+                    </a>
+                  </span>
+                </td>
+                </tr>
+
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+        </div>
+
+    </div>
+    
+
+    <script type="text/javascript" src="jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#primary-search').focus(function () {
+                $('#top-navbar').attr('class', 'dim');
+                $('#side-nav').css('pointer-events', 'none');
+                $('#main-content').css('pointer-events', 'none');
+            });
+            $('#primary-search').focusout(function () {
+                $('#top-navbar').removeAttr('class');
+                $('#side-nav').css('pointer-events', 'auto');
+                $('#main-content').css('pointer-events', 'auto');
+            });
+        })
+    </script>
+
+    
+<script>
+    const xhr = new XMLHttpRequest()
+    const method = 'GET'
+    const url = "lecturers.html"
+    const responseType = "json"
+  
+    xhr.responseType = responseType
+    xhr.open(method, url)
+    xhr.onload = function() {
+      console.log(xhr.response)
+    }
+    xhr.send()
+</script>
+</body>
+
+</html>
 
