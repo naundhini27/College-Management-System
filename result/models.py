@@ -228,12 +228,12 @@ class TakenCourse(models.Model):
             if i.cgpa is not None:
                 previous_cgpa += i.cgpa
         cgpa = 0
-        if str(current_semester) == SECOND:
+        if str(current_semester) == EVEN:
             first_sem_gpa = 0.0
             sec_sem_gpa = 0.0
             try:
                 first_sem_result = Result.objects.get(
-                    student=self.student.id, semester=FIRST, level=self.student.level
+                    student=self.student.id, semester=ODD, level=self.student.level
                 )
                 first_sem_gpa += first_sem_result.gpa
             except:
@@ -241,7 +241,7 @@ class TakenCourse(models.Model):
 
             try:
                 sec_sem_result = Result.objects.get(
-                    student=self.student.id, semester=SECOND, level=self.student.level
+                    student=self.student.id, semester=EVEN, level=self.student.level
                 )
                 sec_sem_gpa += sec_sem_result.gpa
             except:
