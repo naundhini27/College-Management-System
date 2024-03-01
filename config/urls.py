@@ -3,6 +3,9 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views import defaults as default_views
+from django_otp.admin import OTPAdminSite
+
+admin.site.__class__ = OTPAdminSite 
 
 admin.site.site_header = "Dj-LMS Admin"
 
@@ -17,7 +20,7 @@ urlpatterns = [
     path("result/", include("result.urls")),
     path("search/", include("search.urls")),
     path("quiz/", include("quiz.urls")),
-    path("payments/", include("payments.urls")),
+    # path("payments/", include("payments.urls")),
     path("accounts/api/", include("accounts.api.urls", namespace="accounts-api")),
     path("admin/", admin.site.urls),
 ]
