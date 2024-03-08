@@ -7,7 +7,7 @@ from django_otp.admin import OTPAdminSite
 
 # admin.site.__class__ = OTPAdminSite
 
-# admin.site.site_header = "Dj-LMS Admin"
+admin.site.site_header = "Dj-LMS Admin"
 
 urlpatterns = [
     path("jet/", include("jet.urls", "jet")),  # Django JET URLS
