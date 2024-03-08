@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.views import defaults as default_views
 from django_otp.admin import OTPAdminSite
 
-# admin.site.__class__ = OTPAdminSite
+admin.site.__class__ = OTPAdminSite
 
 admin.site.site_header = "Dj-LMS Admin"
 
