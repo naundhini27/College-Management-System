@@ -27,7 +27,7 @@ SECRET_KEY = config(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = ['*','127.0.0.1','localhost','44.203.170.255',]
+ALLOWED_HOSTS = ['*','127.0.0.1','localhost','3.83.104.228',]
 
 # change the default user models to our custom model
 AUTH_USER_MODEL = "accounts.User"
