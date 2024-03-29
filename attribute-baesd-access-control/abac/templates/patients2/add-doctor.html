@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Mirrored from iqonic.design/themes/xray/html/add-doctor.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 01 Jul 2021 07:41:47 GMT -->
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Amrita Telemed Hub| Register New Health Worker</title>
+    <!-- Favicon -->
+    <link
+      rel="shortcut icon"
+      href="../../../static/patients/static/favicons/favicon.png"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="../../../static/patients2/css/bootstrap.min.css"
+    />
+    <!-- Typography CSS -->
+    <link
+      rel="stylesheet"
+      href="../../../static/patients2/css/typography.css"
+    />
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../../../static/patients2/css/style.css" />
+    <!-- Responsive CSS -->
+    <link
+      rel="stylesheet"
+      href="../../../static/patients2/css/responsive.css"
+    />
+  </head>
+  <body>
+    <!-- loader Start -->
+    <div id="loading">
+      <div id="loading-center"></div>
+    </div>
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+      <!-- Sidebar  -->
+
+      {% include 'patients2/adminnav.html' %}
+      <!-- Page Content  -->
+      <div id="content-page" class="content-page">
+        <!-- TOP Nav Bar -->
+        {% include 'patients2/admintopnav.html' %}
+        <!-- TOP Nav Bar END -->
+        <div class="container-fluid">
+          <form action="{{ url }}" method="POST">
+            <div class="row">
+              <div class="col-lg-3">
+                <div class="iq-card">
+                  <div class="iq-card-header d-flex justify-content-between">
+                    <div class="iq-header-title">
+                      <h4 class="card-title">Add New User</h4>
+                    </div>
+                  </div>
+                  <div class="iq-card-body">
+                    <div class="form-group">
+                      <div class="add-img-user profile-img-edit">
+                        <img
+                          class="profile-pic img-fluid"
+                          id="gravicon"
+                          src="../../../static/patients2/images/user/12.jpg"
+                          alt="profile-pic"
+                        />
+                        <div class="p-image">
+                          <a
+                            id="change"
+                            href="javascript:void();"
+                            class="btn iq-bg-primary"
+                            >Change User avatar</a
+                          >
+                        </div>
+                      </div>
+                      <!-- <div class="img-extension mt-3">
+                        <div class="d-inline-block align-items-center">
+                          <span>Only</span>
+                          <a href="javascript:void();">.jpg</a>
+                          <a href="javascript:void();">.png</a>
+                          <a href="javascript:void();">.jpeg</a>
+                          <span>allowed</span>
+                        </div>
+                      </div> -->
+                    </div>
+                    <div class="form-group">
+                      <label>User Role:</label>
+                      <select
+                        name="role"
+                        class="form-control"
+                        id="selectuserrole"
+                        required
+                      >
+                        <option value="doctor">Doctor</option>
+                        <option value="nurse">Nurse</option>
+                        <option value="pharmacist">Pharmacist</option>
+                      </select>
+                    </div>
+                    <!-- <div class="form-group">
+                      <label for="furl">Facebook Url:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="furl"
+                        placeholder="Facebook Url"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="turl">Twitter Url:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="turl"
+                        placeholder="Twitter Url"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="instaurl">Instagram Url:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="instaurl"
+                        placeholder="Instagram Url"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="lurl">Linkedin Url:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="lurl"
+                        placeholder="Linkedin Url"
+                      />
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-9">
+                <div class="iq-card">
+                  <div class="iq-card-header d-flex justify-content-between">
+                    <div class="iq-header-title">
+                      <h4 class="card-title">New User Information</h4>
+                    </div>
+                  </div>
+                  <div class="iq-card-body">
+                    <div class="new-user-info">
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label for="fname">First Name:</label>
+                          <input
+                            required
+                            type="text"
+                            class="form-control"
+                            id="fname"
+                            name="fname"
+                            placeholder="First Name"
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="lname">Last Name:</label>
+                          <input
+                            required
+                            type="text"
+                            class="form-control"
+                            id="lname"
+                            name="lname"
+                            placeholder="Last Name"
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="add1">Address</label>
+                          <input
+                            required
+                            type="text"
+                            name="address"
+                            class="form-control"
+                            id="add1"
+                            placeholder="Address"
+                          />
+                        </div>
+                        <!-- <div class="form-group col-md-6">
+                          <label for="add2">Street Address 2:</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="add2"
+                            placeholder="Street Address 2"
+                          />
+                        </div> -->
+                        <!-- <div class="form-group col-md-12">
+                          <label for="cname">Department Name:</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="cname"
+                            placeholder="Department Name"
+                          />
+                        </div>
+                        <div class="form-group col-sm-12">
+                          <label>Country:</label>
+                          <select class="form-control" id="selectcountry">
+                            <option>Select Country</option>
+                            <option>Caneda</option>
+                            <option>Noida</option>
+                            <option>USA</option>
+                            <option>India</option>
+                            <option>Africa</option>
+                          </select>
+                        </div> -->
+                        <div class="form-group col-md-6">
+                          <label for="mobno">Phone Number:</label>
+                          <input
+                            required
+                            type="number"
+                            class="form-control"
+                            id="mobno"
+                            name="number"
+                            placeholder="Phone Number"
+                          />
+                          {% if errors %} {% if 'number' in errors %}
+
+                          <small class="text-danger"
+                            >{{errors['number']}}</small
+                          >
+
+                          {% endif %} {% endif %}
+                        </div>
+                        <!-- <div class="form-group col-md-6">
+                          <label for="altconno">Alternate Contact:</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="altconno"
+                            placeholder="Alternate Contact"
+                          />
+                        </div> -->
+                        <div class="form-group col-md-6">
+                          <label for="email">Email:</label>
+                          <input
+                            required
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            placeholder="Email"
+                          />
+                          {% if errors %} {% if 'email' in errors %}
+
+                          <small class="text-danger">{{errors['email']}}</small>
+
+                          {% endif %} {% endif %}
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label>Gender:</label>
+                          <select
+                            name="gender"
+                            class="form-control"
+                            id="selectuserrole"
+                            required
+                          >
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                          </select>
+                        </div>
+
+                        <!-- <div class="form-group col-md-12">
+                          <label for="city">Town/City:</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="city"
+                            placeholder="Town/City"
+                          />
+                        </div>
+                      </div>
+                      <hr />
+                      <h5 class="mb-3">Security</h5>
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                          <label for="uname">User Name:</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="uname"
+                            placeholder="User Name"
+                          />
+                        </div> -->
+                        <div class="form-group col-md-6">
+                          <label for="pass">Password:</label>
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="pass"
+                            name="password"
+                            placeholder="Password"
+                            required
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="rpass">Repeat Password:</label>
+                          <input
+                            required
+                            type="password"
+                            class="form-control"
+                            id="rpass"
+                            name="re_password"
+                            placeholder="Repeat Password "
+                          />
+                          <small class="text-danger"></small>
+                          {% if errors %} {% if 'password' in errors %}
+
+                          <small class="text-danger"
+                            >{{errors['password']}}</small
+                          >
+
+                          {% endif %} {% endif %}
+                        </div>
+                      </div>
+                      <!-- <div class="checkbox">
+                        <label
+                          ><input class="mr-2" type="checkbox" />Enable
+                          Two-Factor-Authentication</label
+                        >
+                      </div> -->
+                      <button type="submit" class="btn btn-primary">
+                        Add New User
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- Footer -->
+        {% include 'patients2/patientfooter.html' %}
+        <!-- Footer END -->
+      </div>
+    </div>
+
+    <!-- password match validation -->
+    <script>
+      var repass = document.querySelector('#rpass');
+      const button = document.querySelector('button[type=submit]');
+      const msg = document.querySelector('.text-danger');
+
+      repass.oninput = function () {
+        var pass = document.querySelector('#pass').value;
+
+        valid = pass === repass.value;
+
+        if (valid) {
+          button.removeAttribute('disabled');
+          msg.textContent = '';
+          pass;
+        } else {
+          button.setAttribute('disabled', 'true');
+          msg.textContent = 'Passwords do not match';
+        }
+      };
+
+      //Code for changing Gravicon
+      const female = '../../../static/patients2/images/user/12.jpg';
+      const male = '../../../static/patients2/images/user/07.jpg';
+
+      const change = document.querySelector('#change');
+      var   gravicon = document.querySelector('#gravicon');
+
+      change.onclick = function () {
+        isMale = gravicon.getAttribute('src') === male;
+        if (isMale) {
+          gravicon.setAttribute('src', female);
+        } else {
+          gravicon.setAttribute('src', male);
+        }
+      };
+    </script>
+
+    <!-- Wrapper END -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../../../static/patients2/js/jquery.min.js"></script>
+    <script src="../../../static/patients2/js/popper.min.js"></script>
+    <script src="../../../static/patients2/js/bootstrap.min.js"></script>
+    <!-- Appear JavaScript -->
+    <script src="../../../static/patients2/js/jquery.appear.js"></script>
+    <!-- Countdown JavaScript -->
+    <script src="../../../static/patients2/js/countdown.min.js"></script>
+    <!-- Counterup JavaScript -->
+    <script src="../../../static/patients2/js/waypoints.min.js"></script>
+    <script src="../../../static/patients2/js/jquery.counterup.min.js"></script>
+    <!-- Wow JavaScript -->
+    <script src="../../../static/patients2/js/wow.min.js"></script>
+    <!-- Apexcharts JavaScript -->
+    <script src="../../../static/patients2/js/apexcharts.js"></script>
+    <!-- Slick JavaScript -->
+    <script src="../../../static/patients2/js/slick.min.js"></script>
+    <!-- Select2 JavaScript -->
+    <script src="../../../static/patients2/js/select2.min.js"></script>
+    <!-- Owl Carousel JavaScript -->
+    <script src="../../../static/patients2/js/owl.carousel.min.js"></script>
+    <!-- Magnific Popup JavaScript -->
+    <script src="../../../static/patients2/js/jquery.magnific-popup.min.js"></script>
+    <!-- Smooth Scrollbar JavaScript -->
+    <script src="../../../static/patients2/js/smooth-scrollbar.js"></script>
+    <!-- lottie JavaScript -->
+    <script src="../../../static/patients2/js/lottie.js"></script>
+    <!-- Chart Custom JavaScript -->
+    <script src="../../../static/patients2/js/chart-custom.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="../../../static/patients2/js/custom.js"></script>
+  </body>
+
+  <!-- Mirrored from iqonic.design/themes/xray/html/add-doctor.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 01 Jul 2021 07:41:47 GMT -->
+</html>
+
+
+
+
+

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Mirrored from iqonic.design/themes/xray/html/table-editable.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 01 Jul 2021 07:43:19 GMT -->
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Amrita Telemed Hub | Edit EHR Record</title>
+    <!-- Favicon -->
+    <link
+      rel="shortcut icon"
+      href="../../../static/patients/static/favicons/favicon.png"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="../../../static/patients2/css/bootstrap.min.css"
+    />
+    <!-- Typography CSS -->
+    <link
+      rel="stylesheet"
+      href="../../../static/patients2/css/typography.css"
+    />
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../../../static/patients2/css/style.css" />
+    <!-- Responsive CSS -->
+    <link
+      rel="stylesheet"
+      href="../../../static/patients2/css/responsive.css"
+    />
+  </head>
+  <body>
+    <!-- loader Start -->
+    <div id="loading">
+      <div id="loading-center"></div>
+    </div>
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+      <!-- Sidebar  -->
+      {% include 'patients2/workernav.html' %}
+      <!-- Page Content  -->
+      <div id="content-page" class="content-page">
+        <!-- TOP Nav Bar -->
+        {% include 'patients2/workertopnav.html' %}
+        <!-- TOP Nav Bar END -->
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="iq-card">
+                <div class="iq-card-header d-flex justify-content-between">
+                  <div class="iq-header-title">
+                    <h4
+                      id="pid"
+                      data-id="{{patient['public_id']}}"
+                      class="card-title"
+                    >
+                      {{patient['name'].split(' ')[0]}}'s {{view}}
+                    </h4>
+                  </div>
+                </div>
+                <div class="iq-card-body">
+                  <div id="table" class="table-editable">
+                    <span class="table-add float-right mb-3 mr-2">
+                      <button id="radd" class="btn btn-sm iq-bg-success">
+                        <i class="ri-add-fill"
+                          ><span class="pl-1">Add New</span></i
+                        >
+                      </button>
+                    </span>
+                    <table
+                      id="rec-table"
+                      class="
+                        table table-bordered table-responsive-md table-striped
+                        text-center
+                      "
+                    >
+                      <thead>
+                        <tr>
+                          <!-- printing the key part -->
+                          {% if data == 'mp' %}
+                          <th>Medicine</th>
+
+                          {% elif data == 'vi' %}
+
+                          <th>Parameter</th>
+                          {% elif data == 'dt' %}
+                          <th>Recommended Test</th>
+                          {% elif data == 'ph' %}
+                          <th>Questions</th>
+
+                          {% endif %}
+
+                          <!-- printing the value part -->
+                          {% if data == 'mp' %}
+                          <th>Dosage</th>
+
+                          {% elif data == 'vi' %}
+
+                          <th>Value</th>
+                          {% elif data == 'dt' %}
+                          <th>Description</th>
+                          {% elif data == 'ph' %}
+                          <th>Answers</th>
+
+                          {% endif %}
+
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody id="rec-con">
+                        {% if not records %}
+
+                        <tr class="record">
+                          <td contenteditable="true">N/A</td>
+                          <td contenteditable="true">N/A</td>
+                          <td>
+                            <span class="table-remove"
+                              ><button
+                                type="button"
+                                id="remove"
+                                class="btn iq-bg-danger btn-rounded btn-sm my-0"
+                              >
+                                Remove
+                              </button></span
+                            >
+                          </td>
+                        </tr>
+
+                        {% else %} {% for record in records %}
+
+                        <tr class="record">
+                          <td contenteditable="true">{{record}}</td>
+                          <td contenteditable="true">{{records[record]}}</td>
+                          <td>
+                            <span class="table-remove"
+                              ><button
+                                type="button"
+                                id="remove"
+                                class="btn iq-bg-danger btn-rounded btn-sm my-0"
+                              >
+                                Remove
+                              </button></span
+                            >
+                          </td>
+                        </tr>
+
+                        {% endfor %} {% endif %}
+                      </tbody>
+                    </table>
+                    <button id="update" type="submit" class="btn btn-primary">
+                      Finalize Record Update
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Footer -->
+        {% include 'patients2/patientfooter.html' %}
+        <!-- Footer END -->
+      </div>
+    </div>
+
+    <!-- Setting up custom JavaScript -->
+    <script>
+      //getting the elements from the DOM
+
+      const rAdd = document.querySelector('#radd');
+      //const aAdd = document.querySelector('#aadd');
+      const recCon = document.querySelector('#rec-con');
+      //const attCon = document.querySelector('#attrib');
+      //const attTemp = document.querySelector('#att-con').outerHTML;
+      const update = document.querySelector('#update');
+      //const form = document.querySelector('#form');
+
+      // new record cell layout
+      const nRecord = `
+       <tr class="record">
+                          <td contenteditable="true">N/A</td>
+                          <td contenteditable="true">N/A</td>
+                          <td>
+                            <span class="table-remove"
+                              ><button
+                                type="button" id="remove"
+                                class="btn iq-bg-danger btn-rounded btn-sm my-0"
+                              >
+                                Remove
+                              </button></span
+                            >
+                          </td>
+                        </tr>
+      `;
+
+      //adding new record input cells
+      rAdd.onclick = function () {
+        document
+          .querySelector('#rec-con')
+          .insertAdjacentHTML('beforeend', nRecord);
+      };
+      //removing record input cells
+      recCon.onclick = function (e) {
+        if (e.target.id === 'remove') {
+          e.target.parentElement.parentElement.parentElement.remove();
+        }
+      };
+
+      // adding new attribute cells
+      //aAdd.onclick = function () {
+      //document.querySelector('#att').innerHTML += attTemp;
+      //};
+
+      //removing attribute cells
+      //attCon.onclick = function (e) {
+      // if (e.target.id === 'remove') {
+      //  e.target.parentElement.parentElement.remove();
+      //}
+      //};
+
+      //listening for click of update button
+      update.onclick = async function (e) {
+        //preventing default behavior
+        e.preventDefault();
+        let record = {};
+
+        // getting the records from the taable
+        //getting the data and sorting it based on backend Schema
+        let oTable = document.getElementById('rec-table');
+        let data = [...oTable.rows].map((t) =>
+          [...t.children].map((e, index, table) => {
+            //adding the elements into an object
+            record[table[0].innerText] = table[1].innerText;
+          })
+        );
+
+        //delete tab['Recommended Test'];
+        for (let key in record) {
+          delete record[key];
+          break;
+        }
+
+        const body = {
+          record: record,
+        };
+
+        update.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Updating...';
+
+        const id = document.querySelector('#pid').dataset.id;
+        const recType = '{{data}}';
+
+        url =
+          window.location.origin +
+          `/workers/patients/records/save/?record=${recType}&id=${id}`;
+
+        const request = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+
+          body: JSON.stringify(body),
+        });
+
+        const response = await request.json();
+
+        console.log(response);
+
+        if (request.ok) {
+          if (response.status === true) {
+            window.location.href =
+              window.location.origin + '/workers/patients/list/';
+          } else {
+            update.innerHTML = 'Finalize Record Update';
+          }
+        } else {
+          update.innerHTML = 'Finalize Record Update';
+        }
+      };
+    </script>
+
+    <!-- Wrapper END -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../../../static/patients2/js/jquery.min.js"></script>
+    <script src="../../../static/patients2/js/popper.min.js"></script>
+    <script src="../../../static/patients2/js/bootstrap.min.js"></script>
+    <!-- Appear JavaScript -->
+    <script src="../../../static/patients2/js/jquery.appear.js"></script>
+    <!-- Countdown JavaScript -->
+    <script src="../../../static/patients2/js/countdown.min.js"></script>
+    <!-- Counterup JavaScript -->
+    <script src="../../../static/patients2/js/waypoints.min.js"></script>
+    <script src="../../../static/patients2/js/jquery.counterup.min.js"></script>
+    <!-- Wow JavaScript -->
+    <script src="../../../static/patients2/js/wow.min.js"></script>
+    <!-- Apexcharts JavaScript -->
+    <script src="../../../static/patients2/js/apexcharts.js"></script>
+    <!-- Slick JavaScript -->
+    <script src="../../../static/patients2/js/slick.min.js"></script>
+    <!-- Select2 JavaScript -->
+    <script src="../../../static/patients2/js/select2.min.js"></script>
+    <!-- Owl Carousel JavaScript -->
+    <script src="../../../static/patients2/js/owl.carousel.min.js"></script>
+    <!-- Magnific Popup JavaScript -->
+    <script src="../../../static/patients2/js/jquery.magnific-popup.min.js"></script>
+    <!-- Smooth Scrollbar JavaScript -->
+    <script src="../../../static/patients2/js/smooth-scrollbar.js"></script>
+    <!-- lottie JavaScript -->
+    <script src="../../../static/patients2/js/lottie.js"></script>
+    <!-- Chart Custom JavaScript -->
+    <script src="../../../static/patients2/js/chart-custom.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="../../../static/patients2/js/custom.js"></script>
+  </body>
+
+  <!-- Mirrored from iqonic.design/themes/xray/html/table-editable.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 01 Jul 2021 07:43:19 GMT -->
+</html>

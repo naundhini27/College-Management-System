@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Mirrored from iqonic.design/themes/xray/html/app/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 01 Jul 2021 07:41:25 GMT -->
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Anointed Communications College | Book An Appointment</title>
+    <!-- Favicon -->
+    <link
+      rel="shortcut icon"
+      href="../../../static/patients/static/favicons/favicon.png"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="../../../static/patients2/css/bootstrap.min.css"
+    />
+    <!-- Typography CSS -->
+    <link
+      rel="stylesheet"
+      href="../../../static/patients2/css/typography.css"
+    />
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../../../static/patients2/css/style.css" />
+    <!-- Responsive CSS -->
+    <link
+      rel="stylesheet"
+      href="../../../static/patients2/css/responsive.css"
+    />
+  </head>
+  <body>
+    <!-- loader Start -->
+    <div id="loading">
+      <div id="loading-center"></div>
+    </div>
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+      <!-- Sidebar  -->
+      {% include 'patients2/patientnav.html' %}
+
+      <!-- Page Content  -->
+      <div id="content-page" class="content-page">
+        <!-- TOP Nav Bar -->
+        {% include 'patients2/patienttopnav.html' %}
+        <!-- TOP Nav Bar END -->
+        <div class="container-fluid relative">
+          <div class="row">
+            <div class="col-lg-12 mail-box-detail">
+              <div class="iq-card iq-border-radius-20 mb-0">
+                <div class="iq-card-body">
+                  <div class="row align-items-center">
+                    <div class="col-md-12 mb-3">
+                      <h5 class="text-primary float-left">
+                        <i class="ri-calendar-event-fill"></i>Book An
+                        Appointment
+                      </h5>
+                      <button
+                        type="submit"
+                        class="float-right close-popup"
+                        data-dismiss="modal"
+                      >
+                        <i class="ri-close-fill"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <form action="{{url}}" class="email-form" method="POST">
+                    <div class="form-group row">
+                      <label for="inputEmail3" class="col-sm-2 col-form-label"
+                        >To:</label
+                      >
+                      <div class="col-sm-10">
+                        <select
+                          required
+                          name="worker"
+                          id="inputEmail3"
+                          class="form-control"
+                        >
+                          {% for worker in workers %}
+                          <option value="{{worker['public_id']}}">
+                            {{worker['role']}}... {{worker['fname']}}
+                            {{worker['lname']}}
+                          </option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label for="subject" class="col-sm-2 col-form-label"
+                        >Appointment Date:</label
+                      >
+                      <div class="col-sm-10">
+                        <input
+                          required
+                          type="datetime-local"
+                          id="subject"
+                          name="date"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="subject" class="col-sm-2 col-form-label"
+                        >Appointment Subject:</label
+                      >
+                      <div class="col-sm-10">
+                        <input
+                          required
+                          placeholder="What is this appointment about...?"
+                          type="text"
+                          id="subject"
+                          name="title"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="subject" class="col-sm-2 col-form-label"
+                        >Your Message:</label
+                      >
+                      <div class="col-md-10">
+                        <textarea
+                          name="message"
+                          placeholder="Let the health worker know why you are making this appointment..."
+                          required
+                          class="textarea form-control"
+                          rows="5"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div
+                      class="
+                        form-group
+                        row
+                        align-items-center
+                        compose-bottom
+                        pt-3
+                        m-0
+                      "
+                    >
+                      <div class="d-flex flex-grow-1 align-items-center">
+                        <div class="send-btn">
+                          <button type="submit" class="btn btn-primary">
+                            Initiate Appointment
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      {% include 'patients2/patientfooter.html' %}
+    </div>
+
+    <script>
+      const messages = document.querySelectorAll('.iq-unread');
+      const count = document.querySelector('#count');
+
+      messages.forEach((message) => {
+        message.onclick = async function () {
+          const id = message.dataset.id;
+
+          url = window.location.origin + `/admin/inbox/markAsRead/?id=${id}`;
+
+          const request = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            // body: JSON.stringify(body),
+          });
+
+          const response = await request.json();
+
+          if (request.ok) {
+            if (response.status === true) {
+              message.classList.remove('iq-unread');
+              if (count.innerText != '0') {
+                count.innerText = parseInt(count.innerText) - 1;
+              }
+              return;
+            } else {
+              return;
+            }
+          } else {
+            return;
+          }
+        };
+      });
+    </script>
+    <!-- Wrapper END -->
+    <!-- Footer END -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      data-cfasync="false"
+      src="../../../static/patients2/../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script src="../../../static/patients2/js/jquery.min.js"></script>
+    <script src="../../../static/patients2/js/popper.min.js"></script>
+    <script src="../../../static/patients2/js/bootstrap.min.js"></script>
+    <!-- Appear JavaScript -->
+    <script src="../../../static/patients2/js/jquery.appear.js"></script>
+    <!-- Countdown JavaScript -->
+    <script src="../../../static/patients2/js/countdown.min.js"></script>
+    <!-- Counterup JavaScript -->
+    <script src="../../../static/patients2/js/waypoints.min.js"></script>
+    <script src="../../../static/patients2/js/jquery.counterup.min.js"></script>
+    <!-- Wow JavaScript -->
+    <script src="../../../static/patients2/js/wow.min.js"></script>
+    <!-- Apexcharts JavaScript -->
+    <script src="../../../static/patients2/js/apexcharts.js"></script>
+    <!-- Slick JavaScript -->
+    <script src="../../../static/patients2/js/slick.min.js"></script>
+    <!-- Select2 JavaScript -->
+    <script src="../../../static/patients2/js/select2.min.js"></script>
+    <!-- Owl Carousel JavaScript -->
+    <script src="../../../static/patients2/js/owl.carousel.min.js"></script>
+    <!-- Magnific Popup JavaScript -->
+    <script src="../../../static/patients2/js/jquery.magnific-popup.min.js"></script>
+    <!-- Smooth S../crollbar JavaScript -->
+    <script src="../../../static/patients2/js/smooth-scrollbar.js"></script>
+    <!-- lottie JavaScript -->
+    <script src="../../../static/patients2/js/lottie.js"></script>
+    <!-- Chart Custom JavaScript -->
+    <script src="../../../static/patients2/js/chart-custom.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="../../../static/patients2/js/custom.js"></script>
+  </body>
+
+  <!-- Mirrored from iqonic.design/themes/xray/html/app/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 01 Jul 2021 07:41:35 GMT -->
+</html>
