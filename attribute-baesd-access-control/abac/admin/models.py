@@ -8,7 +8,7 @@ from flask import session
 class Admin:
     # initializing the class
     def __init__(self, fname=None, lname=None, email=None, password=None, address=None, number=None, gender=None, role=None):
-        self.fname = fname
+        self.fname = fname          
         self.lname = lname
         self.email = email
         self.password = password
@@ -36,11 +36,12 @@ class Admin:
             }
 
             mongo.db.workers.insert_one(user)
+            mongo.db.admin.insert_one(user)
         except:
             return False
 
         return True
-
+    
     # route for registering recent activities
     @staticmethod
     def recent(data):

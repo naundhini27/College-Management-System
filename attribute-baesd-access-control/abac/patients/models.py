@@ -3,7 +3,13 @@ from abac import bcrypt, mongo
 from datetime import datetime
 from flask import session
 from abac.workers.models import Worker
+import binascii, secrets
+from tinyec import registry
+import ecc
 
+curve = registry.get_curve('brainpoolP256r1')
+privKey = 29602356343871707410420205002392794180866553223632945850562014741270236846432
+pubKey = privKey * curve.g
 
 # the User class
 class Patient:
@@ -20,6 +26,56 @@ class Patient:
     def signup(self):
 
         try:
+            encryptedMsg_n = ecc.encrypt_ECC(self.name.title().strip().encode('ASCII'), pubKey)
+            encryptedMsgObj_n = {
+                'ciphertext': binascii.hexlify(encryptedMsg_n[0]).decode(),
+                'nonce': binascii.hexlify(encryptedMsg_n[1]).decode(),
+                'authTag': binascii.hexlify(encryptedMsg_n[2]).decode(),
+                'ciphertextPubKey': hex(encryptedMsg_n[3].x) + hex(encryptedMsg_n[3].y % 2)[2:]
+            }            
+            encryptedMsg_e = ecc.encrypt_ECC(self.email.lower().encode('ASCII'), pubKey)
+            encryptedMsgObj_e = {
+                'ciphertext': binascii.hexlify(encryptedMsg_e[0]).decode(),
+                'nonce': binascii.hexlify(encryptedMsg_e[1]).decode(),
+                'authTag': binascii.hexlify(encryptedMsg_e[2]).decode(),
+                'ciphertextPubKey': hex(encryptedMsg_e[3].x) + hex(encryptedMsg_e[3].y % 2)[2:]
+            }
+            encryptedMsg_num = ecc.encrypt_ECC(self.number.encode('ASCII'), pubKey)
+            encryptedMsgObj_num = {
+                'ciphertext': binascii.hexlify(encryptedMsg_num[0]).decode(),
+                'nonce': binascii.hexlify(encryptedMsg_num[1]).decode(),
+                'authTag': binascii.hexlify(encryptedMsg_num[2]).decode(),
+                'ciphertextPubKey': hex(encryptedMsg_num[3].x) + hex(encryptedMsg_num[3].y % 2)[2:]
+            }
+            encryptedMsg_add = ecc.encrypt_ECC(self.address.encode('ASCII'), pubKey)
+            encryptedMsgObj_add = {
+                'ciphertext': binascii.hexlify(encryptedMsg_add[0]).decode(),
+                'nonce': binascii.hexlify(encryptedMsg_add[1]).decode(),
+                'authTag': binascii.hexlify(encryptedMsg_add[2]).decode(),
+                'ciphertextPubKey': hex(encryptedMsg_add[3].x) + hex(encryptedMsg_add[3].y % 2)[2:]
+            }
+            encryptedMsg_g = ecc.encrypt_ECC(self.gender.encode('ASCII'), pubKey)
+            encryptedMsgObj_g = {
+                'ciphertext': binascii.hexlify(encryptedMsg_g[0]).decode(),
+                'nonce': binascii.hexlify(encryptedMsg_g[1]).decode(),
+                'authTag': binascii.hexlify(encryptedMsg_g[2]).decode(),
+                'ciphertextPubKey': hex(encryptedMsg_g[3].x) + hex(encryptedMsg_g[3].y % 2)[2:]
+            }
+            user = {
+                'id' : self.name.title().strip(),
+                'public_id': uuid4().hex,
+                'name': encryptedMsgObj_n,
+                'email': encryptedMsgObj_e,
+                'password': bcrypt.generate_password_hash(
+                    self.password).decode('utf-8'),
+                'number': encryptedMsgObj_num,
+                'privkey':str(privKey),
+                'address': encryptedMsgObj_add,
+                'gender': encryptedMsgObj_g,
+                'dateCreated': datetime.utcnow()
+            }
+            mongo.db.patients_.insert_one(user)
+            '''
             user = {
                 'public_id': uuid4().hex,
                 'name': self.name.title().strip(),
@@ -31,8 +87,20 @@ class Patient:
                 'gender': self.gender,
                 'dateCreated': datetime.utcnow()
             }
-
             mongo.db.patients.insert_one(user)
+            '''
+            usr = {
+                'public_id': uuid4().hex,
+                'name': self.name.title().strip(),
+                'email': self.email.lower(),
+                'password': bcrypt.generate_password_hash(
+                    self.password).decode('utf-8'),
+                'number': self.number,
+                'address': self.address,
+                'gender': self.gender,
+                'dateCreated': datetime.utcnow()
+            }
+            mongo.db.patients.insert_one(usr)
         except:
             return False
 
@@ -51,6 +119,7 @@ class Patient:
     # signin helper function
     def signin(self, signin_data):
         # querying user from db with username
+        signin_data['identifier'].lower()
         user = mongo.db.patients.find_one(
             {"username": signin_data['identifier'].lower()})
 
@@ -80,12 +149,16 @@ class Patient:
     # email validator helper function
     @staticmethod
     def check_email(email):
-        return mongo.db.patients.find_one({"email": email.lower()})
+        e = ecc.encrypt_ECC(email.encode('ASCII'),pubKey)
+        mongo.db.patients_.find_one({"email.ciphertext" :binascii.hexlify(e[0]).decode()})
+        return mongo.db.patients.find_one({"email" :email})
 
     # number validator helper function
     @staticmethod
     def check_number(number):
-        return mongo.db.patients.find_one({"number": number})
+        num = ecc.encrypt_ECC(number.encode('ASCII'),pubKey)
+        mongo.db.patients_.find_one({"number.ciphertext" : binascii.hexlify(num[0]).decode()})
+        return mongo.db.patients.find_one({"number" :number})
 
     # user retrieval helper function
     @staticmethod

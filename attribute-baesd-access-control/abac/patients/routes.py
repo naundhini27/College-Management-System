@@ -74,7 +74,6 @@ def login():
     user = Patient().signin(data)
 
     if user == False:
-
         flash('Invalid Signin Details', "danger")
         return redirect(url_for('patients.signin'))
     else:
